@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriBot - Personal AI Nutrition Expert</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="navbar">
+        <h2>NutriBot</h2>
+        <div><span>Home</span> | <span>Chat</span> | <span>Dashboard</span></div>
+    </div>
+    <div class="container">
+        <h1>Your Personal AI Nutrition Expert</h1>
+        <p>Get personalized nutrition advice, meal plans, and health insights powered by IBM Watsonx.ai and Granite models.</p>
+        
+        <div class="chat-box" id="chat-box">
+            <div class="message bot">Hello! I am NutriBot. How can I assist with your nutrition and dietary goals today?</div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="e.g., Create a 1-day diet plan for weight loss...">
+            <button onclick="sendMessage()">Send Prompt</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const inputField = document.getElementById('user-input');
+            const chatBox = document.getElementById('chat-box');
+            const prompt = inputField.value.trim();
+            if (!prompt) return;
+
+            chatBox.innerHTML += `<div class="message user">${prompt}</div>`;
+            inputField.value = '';
+
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: prompt })
+            });
+
+            const data = await response.json();
+            chatBox.innerHTML += `<div class="message bot">${data.response.replace(/\n/g, '<br>')}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
