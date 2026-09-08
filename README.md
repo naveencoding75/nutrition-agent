@@ -22,18 +22,19 @@ NutriBot is a multi-agent AI application built with Flask, IBM watsonx.ai, and I
    git clone [https://github.com/naveencoding75/nutrition-agent.git](https://github.com/naveencoding75/nutrition-agent.git)
    cd nutrition-agent
    ```
+
 2. Install dependencies:
 ```
 pip install -r requirements.txt
 ```
-Set up environment variables in .env:
 
+3. Set up environment variables in .env:
 ```Code snippet
 IBM_CLOUD_API_KEY=your_key_here
 WATSONX_PROJECT_ID=your_project_id_here
 ```
 
-Start the application:
+4. Start the application:
 ```
 python app.py
 ```
